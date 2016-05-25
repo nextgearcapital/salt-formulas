@@ -4,10 +4,11 @@ utilized via gitfs within salt. All configuration data should be stored in pilla
 these formulas.
 
 ### Linux States:
-*  [mongdb](https://github.com/saltstack-formulas/mongodb-formula):  State for managing the installation
-and configuration of MongoDB.
+*  [mongdb](https://github.com/saltstack-formulas/mongodb-formula):  State for managing the installation and configuration of MongoDB.
+*  ngc-resolv: State for managing the resolv.conf;  resolver will be removed...
 
 *  [resolver](https://github.com/saltstack-formulas/resolver-formula): State to manage the /etc/resolv.conf
+
 
 ### Windows States:
 *  [RDP](https://github.com/saltstack-formulas/rdp-formula): State for managing the installation and configuration of Windows Remote Desktop.
