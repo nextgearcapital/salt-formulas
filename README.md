@@ -1,7 +1,11 @@
-# salt-formulas
-## Linux States:
-###  mongodb: https://github.com/saltstack-formulas/mongodb-formula 
+# Salt-Formulas
+A collection of salt formulas pulled from https://github.com/nextgearcapital/salt-formulas, and
+utilized via gitfs within salt. All configuration data should be stored in pillars and not within
+these formulas.
 
-## Windows States:
-### RDP:   https://github.com/saltstack-formulas/rdp-formula
+### Linux States:
+	mongodb: https://github.com/saltstack-formulas/mongodb-formula 
+
+### Windows States:
+	RDP:   https://github.com/saltstack-formulas/rdp-formula
 
