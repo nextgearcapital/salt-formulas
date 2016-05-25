@@ -16,3 +16,4 @@ ngc-resolv-file:
         searchpaths: {{ salt['pillar.get']('ngc-resolv:searchpaths', [salt['grains.get']('domain'),]) }}
         domain: {{ salt['pillar.get']('ngc-resolv:domain', [salt['grains.get']('domain'),]) }}
         options: {{ salt['pillar.get']('ngc-resolv:options', []) }}
+{% endif %}
