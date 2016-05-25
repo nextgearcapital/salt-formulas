@@ -3,6 +3,8 @@
 #######################################
 {% if grains['kernel'] == 'Linux' %}
 
+{%- from "ngc-resolv/map.jinja" import mdb with context -%}
+
 ngc-resolv-file:
   file.managed:
     - name: /etc/resolv.conf
