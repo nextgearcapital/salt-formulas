@@ -3,7 +3,7 @@
 #######################################
 {% if grains['kernel'] == 'Linux' %}
 
-{%- from "ngc-resolv/map.jinja" import mdb with context -%}
+{%- from "ngc-resolv/map.jinja" import rmap with context -%}
 
 ngc-resolv-file:
   file.managed:
