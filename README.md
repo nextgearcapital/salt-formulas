@@ -5,6 +5,7 @@ these formulas.
 
 ### Linux States:
 	mongodb: https://github.com/saltstack-formulas/mongodb-formula 
+    resolver: https://github.com/saltstack-formulas/resolver-formula
 
 ### Windows States:
 	RDP:   https://github.com/saltstack-formulas/rdp-formula
