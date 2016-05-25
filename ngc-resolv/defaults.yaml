@@ -1,0 +1,14 @@
+ngc-resolv:
+  file.managed:
+    - name: /etc/resolv.conf
+    - user: root
+    - group: root
+    - mode: '0644'
+    - source: salt://ngc-resolv/files/resolv.conf
+    - template: jinja
+    - replace: true
+    - defaults:
+        nameservers: 8.8.8.8
+        searchpaths:
+        domain:
+        options:

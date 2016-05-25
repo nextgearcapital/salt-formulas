@@ -1,1 +1,2 @@
+{% import_yaml "ngc-resolv/defaults.yaml" as defaults %}
 {% set rmap = salt['pillar.get']('ngc-resolv', default=defaults.ngc-resolv, merge=True) %}
