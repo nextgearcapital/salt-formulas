@@ -13,8 +13,8 @@ ngc-resolv-file:
     - template: jinja
     - replace: true
     - defaults:
-        nameservers: {{ salt['pillar.get']('ngc-resolv:nameservers', ['8.8.8.8','8.8.4.4']) }}
-        searchpaths: {{ salt['pillar.get']('ngc-resolv:searchpaths', [salt['grains.get']('domain'),]) }}
-        domain: {{ salt['pillar.get']('ngc-resolv:domain', salt['grains.get']('domain')) }}
+        nameservers: {{ salt['pillar.get']('ngc-resolv:nameservers', []) }}
+        searchpaths: {{ salt['pillar.get']('ngc-resolv:searchpaths', []) }}
+        domain: {{ salt['pillar.get']('ngc-resolv:domain', []) }}
         options: {{ salt['pillar.get']('ngc-resolv:options', []) }}
 {% endif %}
