@@ -4,8 +4,8 @@ utilized via gitfs within salt. All configuration data should be stored in pilla
 these formulas.
 
 ### Linux States:
-	mongodb: [https://github.com/saltstack-formulas/mongodb-formula]
-    resolver: [https://github.com/saltstack-formulas/resolver-formula]
+[mongdb](https://github.com/saltstack-formulas/mongodb-formula)
+  [resolver](https://github.com/saltstack-formulas/resolver-formula)
 
 ### Windows States:
-	RDP:   [https://github.com/saltstack-formulas/rdp-formula]
+  [RDP](https://github.com/saltstack-formulas/rdp-formula)
