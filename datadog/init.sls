@@ -47,7 +47,13 @@ datadog-conf:
       - pkg: datadog-pkg
     - require:
       - cmd: datadog-example
- 
+
+datadog-tags:
+  file.append:
+    - name: /etc/dd-agent/datadog.conf
+    - text:
+      - "tags: {{ pillar['datadog']['tags'] }}"
+
 datadog-agent-service:
   service:
     - name: datadog-agent
