@@ -38,15 +38,21 @@ datadog-example:
       - pkg: datadog-pkg
  
 datadog-conf:
-  file.replace:
-    - name: /etc/dd-agent/datadog.conf
-    - pattern: "api_key:(.*)"
-    - repl: "api_key: {{ pillar['datadog']['api_key'] }}"
-    - count: 1
-    - watch:
-      - pkg: datadog-pkg
-    - require:
-      - cmd: datadog-example
+ file.managed:
+   - name: {{ salt['pillar.get']('datadog:config_file_path', '/etc/dd-agent/datadog.conf') }}
+   - source: salt://datadog/files/datadog_conf.jinja
+   - template: jinja
+   - user: root
+   - group: root
+   - mode: 644
+   - watch:
+     - pkg: datadog-pkg
+   - require:
+     - cmd: datadog-example
+   {% if salt['pillar.get']('datadog:overwrite', default=True) == False %}
+   - unless:
+     - test -e {{ salt['pillar.get']('datadog:config_file_path', '/etc/dd-agent/datadog.conf') }}
+   {% endif %}
 
 datadog-tags:
   file.append:
