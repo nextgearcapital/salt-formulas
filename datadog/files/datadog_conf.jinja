@@ -2,8 +2,11 @@
 #
 # This file is managed via SaltStack;  any manual changes could be lost
 #
+{% set env_tag = salt['pillar.get']('d42:env') %}
+{% set location_tag = salt['pillar.get']('location') %}
+{% set team_tag = salt['pillar.get']('tags:team') %}
 [Main]
 dd_url: {{ pillar['datadog']['dd_url'] }}
 api_key: {{ pillar['datadog']['api_key'] }}
 gce_updated_hostname: {{ pillar['datadog']['gce_updated_hostname'] }}
-tags: {{ pillar['datadog']['tags'] }}
+tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, location:{{ location_tag }}'
