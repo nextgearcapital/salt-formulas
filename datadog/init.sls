@@ -54,12 +54,6 @@ datadog-conf:
      - test -e {{ salt['pillar.get']('datadog:config_file_path', '/etc/dd-agent/datadog.conf') }}
    {% endif %}
 
-datadog-tags:
-  file.append:
-    - name: /etc/dd-agent/datadog.conf
-    - text:
-      - "tags: {{ pillar['datadog']['tags'] }}"
-
 datadog-agent-service:
   service:
     - name: datadog-agent
