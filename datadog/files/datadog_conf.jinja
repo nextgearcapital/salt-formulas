@@ -8,5 +8,6 @@
 [Main]
 dd_url: {{ pillar['datadog']['dd_url'] }}
 api_key: {{ pillar['datadog']['api_key'] }}
+hostname: {{ grains['fqdn'] }}
 gce_updated_hostname: {{ pillar['datadog']['gce_updated_hostname'] }}
 tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, location:{{ location_tag }}'
