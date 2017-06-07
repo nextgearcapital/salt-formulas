@@ -4,7 +4,7 @@
 #
 {% set env_tag      = salt['pillar.get']('d42:env')       %}
 {% set team_tag     = salt['pillar.get']('datadog:team')  %}
-{% set role_tag     = salt['pillar.get']('d42:roles')     %}
+{% set role_tag     = salt['pillar.get']('d42:roles').items()     %}
 [Main]
 dd_url: {{ pillar['datadog']['dd_url'] }}
 api_key: {{ pillar['datadog']['api_key'] }}
