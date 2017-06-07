@@ -3,7 +3,6 @@
 # This file is managed via SaltStack;  any manual changes could be lost
 #
 {% set env_tag      = salt['pillar.get']('d42:env')       %}
-{% set location_tag = salt['pillar.get']('location')      %}
 {% set team_tag     = salt['pillar.get']('datadog:team')  %}
 {% set role_tag     = salt['pillar.get']('d42:roles')     %}
 [Main]
@@ -12,7 +11,7 @@ api_key: {{ pillar['datadog']['api_key'] }}
 hostname: {{ grains['fqdn'] }}
 gce_updated_hostname: {{ pillar['datadog']['gce_updated_hostname'] }}
 {% if role_tag %}
-tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, location:{{ location_tag }},{{ role_tag }}'
+tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, {{ role_tag }}'
 {% else %}
-tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, location:{{ location_tag }}'
+tags: 'environment:{{ env_tag }}, team:{{ team_tag }}'
 {% endif %}
