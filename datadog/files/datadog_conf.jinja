@@ -11,7 +11,7 @@ api_key: {{ pillar['datadog']['api_key'] }}
 hostname: {{ grains['fqdn'] }}
 gce_updated_hostname: {{ pillar['datadog']['gce_updated_hostname'] }}
 {% if role_tag %}
-tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, {{ role_tag }}'
+tags: 'environment:{{ env_tag }}, team:{{ team_tag }}, {{ role_tag|join(", ") }}'
 {% else %}
 tags: 'environment:{{ env_tag }}, team:{{ team_tag }}'
 {% endif %}
