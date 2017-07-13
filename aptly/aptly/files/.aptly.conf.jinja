@@ -1,0 +1,43 @@
+{% set architectures = salt['pillar.get']('aptly:architectures', []) %}
+{
+  "rootDir": "{{ salt['pillar.get']('aptly:rootdir') }}",
+  "downloadConcurrency": 4,
+  {# this is to remain backwards compatability to when pillars accepted a comma delimited string, preferred method is a list #}
+  {%- if architectures is string -%}
+  "architectures": [{{ architectures }}],
+  {% else %}
+  "architectures": {{ architectures|json }},
+  {%- endif -%}
+  "dependencyFollowSuggests": false,
+  "dependencyFollowRecommends": false,
+  "dependencyFollowAllVariants": false,
+  "dependencyFollowSource": false,
+{% if salt['pillar.get']('aptly:secure') %}
+  "gpgDisableSign": false,
+  "gpgDisableVerify": false,
+{% else %}
+  "gpgDisableSign": true,
+  "gpgDisableVerify": true,
+{% endif %}
+  "downloadSourcePackages": false,
+  "ppaDistributorID": "ubuntu",
+  "ppaCodename": ""
+{%- if salt['pillar.get']('aptly:s3Endpoints')|length -%},
+  "S3PublishEndpoints":
+  {
+  {% for key,value in salt['pillar.get']('aptly:s3Endpoints').items() -%}
+  "{{ key }}" : {
+    "region" : "{{ value.region }}",
+    "bucket": "{{ value.bucket }}",
+    "awsAccessKeyID": "{{ value.awsAccessKeyID }}",
+    "awsSecretAccessKey": "{{ value.awsSecretAccessKey }}",
+    "prefix": "{{ value.prefix }}",
+    "acl": "{{ value.acl }}",
+    "storageClass": "{{ value.storageClass }}",
+    "encryptionMethod": "{{ value.encryptionMethod }}",
+    "plusWorkaround": {{ value.plusWorkaround }}
+    }{% if not loop.last %}{{","}}{% endif %}
+  {% endfor -%}
+  }
+{% endif %}
+}
