@@ -4,18 +4,13 @@ datadog-apt-https:
     - name: apt-transport-https
 {% endif %}
 
-{% if grains['os_family'].lower() == 'debian' %}
-import-signing-key-datadog:
-  cmd.run:
-    - name: wget -qO - http://apt.nextgearcapital.com/aptly_repo_signing.key | sudo apt-key add -
-{% endif %}
-
 datadog-repo:
   pkgrepo.managed:
     - humanname: NGC datadog repo
     {% if grains['os_family'].lower() == 'debian' %}
     - name: deb http://apt.nextgearcapital.com/datadog-stable datadog-stable main
     - file: /etc/apt/sources.list.d/datadog.list
+    - key_url: http://apt.nextgearcapital.com/aptly_repo_signing.key
     - require:
       - pkg: datadog-apt-https
     {% elif grains['os_family'].lower() == 'redhat' %}
