@@ -4,14 +4,16 @@ datadog-apt-https:
     - name: apt-transport-https
 {% endif %}
 
+import-signing-key-datadog:
+  cmd.run:
+    - name: wget -qO - http://apt.nextgearcapital.com/aptly_repo_signing.key | sudo apt-key add -
+
 datadog-repo:
   pkgrepo.managed:
-    - humanname: "Datadog, Inc."
+    - humanname: NGC datadog repo
     {% if grains['os_family'].lower() == 'debian' %}
-    - name: deb https://apt.datadoghq.com/ stable main
-    - keyserver: keyserver.ubuntu.com
-    - keyid: C7A7DA52
-    - file: /etc/apt/sources.list.d/datadog.list
+    - name: deb http://apt.nextgearcapital.com/datadog-stable datadog-stable main
+    - file: /etc/apt/sources.list.d/nextgearcapital.list
     - require:
       - pkg: datadog-apt-https
     {% elif grains['os_family'].lower() == 'redhat' %}
@@ -21,14 +23,14 @@ datadog-repo:
     - gpgkey: https://yum.datadoghq.com/DATADOG_RPM_KEY.public
     - sslverify: '1'
     {% endif %}
- 
+
 datadog-pkg:
   pkg.latest:
     - name: datadog-agent
     - refresh: True
     - require:
       - pkgrepo: datadog-repo
- 
+
 datadog-example:
   cmd.run:
     - name: cp /etc/dd-agent/datadog.conf.example /etc/dd-agent/datadog.conf
@@ -36,7 +38,7 @@ datadog-example:
     - onlyif: test ! -f /etc/dd-agent/datadog.conf -a -f /etc/dd-agent/datadog.conf.example
     - require:
       - pkg: datadog-pkg
- 
+
 datadog-conf:
  file.managed:
    - name: {{ salt['pillar.get']('datadog:config_file_path', '/etc/dd-agent/datadog.conf') }}
