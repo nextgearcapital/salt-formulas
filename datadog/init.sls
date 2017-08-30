@@ -15,7 +15,7 @@ datadog-repo:
     - humanname: NGC datadog repo
     {% if grains['os_family'].lower() == 'debian' %}
     - name: deb http://apt.nextgearcapital.com/datadog-stable datadog-stable main
-    - file: /etc/apt/sources.list.d/nextgearcapital.list
+    - file: /etc/apt/sources.list.d/datadog.list
     - require:
       - pkg: datadog-apt-https
     {% elif grains['os_family'].lower() == 'redhat' %}
