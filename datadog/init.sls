@@ -4,9 +4,11 @@ datadog-apt-https:
     - name: apt-transport-https
 {% endif %}
 
+{% if grains['os_family'].lower() == 'debian' %}
 import-signing-key-datadog:
   cmd.run:
     - name: wget -qO - http://apt.nextgearcapital.com/aptly_repo_signing.key | sudo apt-key add -
+{% endif %}
 
 datadog-repo:
   pkgrepo.managed:
